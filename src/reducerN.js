@@ -1,5 +1,5 @@
 import React from 'react'
-import { setGlobal, addReducer } from 'reactn'
+import { setGlobal, addReducer, addCallback } from 'reactn'
 
 setGlobal({
   data: null,
@@ -7,6 +7,12 @@ setGlobal({
   globalText: 'some random global text',
   rate: '...',
 })
+
+// Every time the global state changes, this function will execute.
+addCallback(global => {
+  // console.log("The new store is:", global);
+  window.__globalState__ = global
+});
 
 addReducer('incrementX', state => ({
   x: state.x + 1,
